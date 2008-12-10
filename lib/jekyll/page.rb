@@ -46,6 +46,9 @@ module Jekyll
     #
     # Returns nothing
     def write(dest)
+      # transform this page into its proper markup
+      render
+
       FileUtils.mkdir_p(File.join(dest, @dir))
       
       name = @name
