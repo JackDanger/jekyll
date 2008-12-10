@@ -56,7 +56,7 @@ module Jekyll
       entries = entries.reject { |e| File.directory?(e) }
 
       entries.each do |f|
-        self.posts << Post.new(base, f) if Post.valid?(f)
+        self.posts << Post.new(base, f, self) if Post.valid?(f)
       end
       
       self.posts.sort!

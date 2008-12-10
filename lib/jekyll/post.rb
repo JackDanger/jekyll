@@ -26,9 +26,10 @@ module Jekyll
     #   +name+ is the String filename of the post file
     #
     # Returns <Post>
-    def initialize(base, name)
+    def initialize(base, name, site)
       @base = base
       @name = name
+      @site = site
       
       self.process(name)
       self.read_yaml(base, name)
