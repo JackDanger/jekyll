@@ -95,7 +95,7 @@ module Jekyll
           
           # if the file appears to have a YAML header then process it as a page
           if first3 == "---"
-            page = Page.new(self.source, dir, f)
+            page = Page.new(self.source, dir, f, self)
             page.add_layout(self.layouts, site_payload)
             page.write(self.dest)
           # otherwise copy the file without transforming it
