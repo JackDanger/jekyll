@@ -33,14 +33,12 @@ module Jekyll
       self.ext = File.extname(name)
     end
     
-    # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
+    # Prepare this page's payload and transform it
+    #   +do_layout+ is defined in Convertible
     #
     # Returns nothing
-    def add_layout(layouts, site_payload)
-      payload = {"page" => self.data}
-      do_layout(payload, layouts, site_payload)
+    def render
+      do_layout({"page" => self.data}, @site.layouts, @site.site_payload)
     end
     
     # Write the generated page file to the destination directory.
