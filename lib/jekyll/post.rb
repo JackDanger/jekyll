@@ -123,6 +123,7 @@ module Jekyll
       # construct post payload
       related = related_posts(@site.site_payload["site"]["posts"])
       payload = {"page" => self.to_liquid.merge(self.data), "related_posts" => related}
+      payload.merge!(@site.site_payload)
       # convert this into a proper html page
       do_layout(payload, @site.layouts, @site.site_payload)
     end

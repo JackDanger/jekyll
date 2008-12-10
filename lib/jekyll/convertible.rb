@@ -39,9 +39,7 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def do_layout(payload, layouts, site_payload)
-      # construct payload
-      payload = payload.merge(site_payload)
+    def do_layout(payload, layouts)
       # render content
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       self.transform
