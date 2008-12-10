@@ -12,10 +12,11 @@ module Jekyll
     #   +name+ is the String filename of the file
     #
     # Returns <Page>
-    def initialize(base, dir, name)
+    def initialize(base, dir, name, site)
       @base = base
-      @dir = dir
+      @dir  = dir
       @name = name
+      @site = site
       
       self.data = {}
       
