@@ -69,7 +69,7 @@ module Jekyll
     # Returns nothing
     def write_posts
       self.posts.each do |post|
-        post.add_layout(self.layouts, site_payload)
+        post.render
         post.write(self.dest)
       end
     end

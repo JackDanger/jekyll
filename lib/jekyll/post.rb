@@ -109,7 +109,10 @@ module Jekyll
       related = self.class.lsi.find_related(self.content, 11)
       related - [self]
     end
-    
+
+    def render
+      add_layout(@site.layouts, @site.site_payload)
+    end
     # Add any necessary layouts to this post
     #   +layouts+ is a Hash of {"name" => "layout"}
     #   +site_payload+ is the site payload hash
