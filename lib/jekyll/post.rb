@@ -125,7 +125,7 @@ module Jekyll
       payload = {"page" => self.to_liquid.merge(self.data), "related_posts" => related}
       payload.merge!(@site.site_payload)
       # convert this into a proper html page
-      do_layout(payload, @site.layouts, @site.site_payload)
+      do_layout(payload, @site.layouts)
     end
     
     # Write the generated post file to the destination directory.
@@ -133,6 +133,9 @@ module Jekyll
     #
     # Returns nothing
     def write(dest)
+      # transform this post into its proper markup
+      render
+
       FileUtils.mkdir_p(File.join(dest, dir))
       
       path = File.join(dest, self.url)
