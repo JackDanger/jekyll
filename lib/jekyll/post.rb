@@ -115,19 +115,16 @@ module Jekyll
       end
     end
 
-    def render
-      add_layout(@site.layouts, @site.site_payload)
-    end
-    # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
+    # Prepare this post's payload and transform it.
+    #   +do_layout+ is defined in Convertible
     #
     # Returns nothing
-    def add_layout(layouts, site_payload)
+    def render
       # construct post payload
-      related = related_posts(site_payload["site"]["posts"])
+      related = related_posts(@site.site_payload["site"]["posts"])
       payload = {"page" => self.to_liquid.merge(self.data), "related_posts" => related}
-      do_layout(payload, layouts, site_payload)
+      # convert this into a proper html page
+      do_layout(payload, @site.layouts, @site.site_payload)
     end
     
     # Write the generated post file to the destination directory.
