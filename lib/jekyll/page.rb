@@ -38,7 +38,7 @@ module Jekyll
     #
     # Returns nothing
     def render
-      do_layout({"page" => self.data}, @site.layouts, @site.site_payload)
+      do_layout(@site.site_payload.merge("page" => self.data), @site.layouts)
     end
     
     # Write the generated page file to the destination directory.
