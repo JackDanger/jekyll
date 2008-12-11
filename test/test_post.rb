@@ -59,10 +59,12 @@ class TestPost < Test::Unit::TestCase
     assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", p.content
   end
   
-  def test_add_layout
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+  def test_render
+    site = Site.new('', '')
+    site.layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile", site)
+
+    p.render
     
     assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
@@ -78,9 +80,11 @@ class TestPost < Test::Unit::TestCase
   end
   
   def test_data
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-11-21-complex.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    site = Site.new('', '')
+    site.layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-11-21-complex.textile", site)
+
+    p.render
     
     assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: Fri Nov 21 00:00:00 -0800 2008<br />\nid: /2008/11/21/complex</p> >>>", p.output
   end
