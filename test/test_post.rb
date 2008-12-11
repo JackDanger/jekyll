@@ -70,9 +70,10 @@ class TestPost < Test::Unit::TestCase
   def test_write
     clear_dest
     
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    site = Site.new('', '')
+    site.layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile", site)
+
     p.write(dest_dir)
   end
   
