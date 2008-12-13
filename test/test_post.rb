@@ -56,7 +56,7 @@ class TestPost < Test::Unit::TestCase
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     p.transform
     
-    assert_equal "<h1>{{ page.title }}</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p>", p.content
+    assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", p.content
   end
   
   def test_render
@@ -66,7 +66,7 @@ class TestPost < Test::Unit::TestCase
 
     p.render
     
-    assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.output
+    assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
   
   def test_write

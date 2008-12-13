@@ -28,9 +28,17 @@ require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
 require 'jekyll/blocks'
+require 'jekyll/albino'
 
 module Jekyll
-  VERSION = '0.1.4'
+  VERSION = '0.1.5'
+  
+  class << self
+    attr_accessor :lsi, :pygments
+  end
+  
+  Jekyll.lsi = false
+  Jekyll.pygments = false
   
   def self.process(source, dest)
     Jekyll::Site.new(source, dest).process
